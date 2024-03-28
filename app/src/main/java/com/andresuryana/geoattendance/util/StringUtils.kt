@@ -6,11 +6,12 @@ import java.util.Locale
 
 object StringUtils {
 
-    private const val FORMAT_DATE = "E, dd MMM yyyy"
+    private const val FORMAT_DATE_DEFAULT = "dd MMM yyyy"
+    const val FORMAT_DATE_WITH_DAY = "E, dd MMM yyyy"
     private const val FORMAT_TIME = "h:mm a"
 
-    fun Date.formatToDayMonthYear(): String {
-        val dateFormat = SimpleDateFormat(FORMAT_DATE, Locale.getDefault())
+    fun Date.formatDate(pattern: String = FORMAT_DATE_DEFAULT): String {
+        val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
         return dateFormat.format(this)
     }
 

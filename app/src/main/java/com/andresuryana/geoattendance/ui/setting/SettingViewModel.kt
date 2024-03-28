@@ -1,5 +1,6 @@
 package com.andresuryana.geoattendance.ui.setting
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,14 +22,12 @@ class SettingViewModel @Inject constructor(
 
     private var currentLocation: LatLng? = null
 
-    init {
-        getMasterLocation()
-    }
-
-    private fun getMasterLocation() {
+    fun getMasterLocation() {
+        Log.d("SettingViewModel", "getMasterLocation: Getting location...")
         viewModelScope.launch(Dispatchers.IO) {
             val latitude = locationManager.getLatitude()
             val longitude = locationManager.getLongitude()
+            Log.d("SettingViewModel", "getMasterLocation: lat=$latitude, lng=$longitude")
             _location.postValue(LatLng(latitude, longitude))
         }
     }
@@ -43,7 +42,9 @@ class SettingViewModel @Inject constructor(
 
             // Update master location
             currentLocation?.let {
+                Log.d("SettingViewModel", "updateMasterLocation: lat=${it.latitude}, lng=${it.longitude}")
                 locationManager.setMasterLocation(it.latitude, it.longitude)
+                getMasterLocation()
                 onDone.invoke(null)
             }
         }

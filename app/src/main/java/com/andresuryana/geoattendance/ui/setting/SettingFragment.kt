@@ -13,10 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import com.andresuryana.geoattendance.R
 import com.andresuryana.geoattendance.databinding.FragmentSettingBinding
 import com.andresuryana.geoattendance.util.MapsExt.enableMyLocation
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -32,10 +34,14 @@ class SettingFragment : Fragment(), OnMapReadyCallback {
     private val viewModel by viewModels<SettingViewModel>()
 
     private var gmap: GoogleMap? = null
+    private var marker: Marker? = null
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) getMyLocation()
+            if (isGranted) {
+                getMyLocation()
+                viewModel.getMasterLocation()
+            }
         }
 
     override fun onCreateView(
@@ -63,6 +69,9 @@ class SettingFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         gmap = map
+
+        // Retrieve master location when maps is ready
+        viewModel.getMasterLocation()
 
         // Google Maps settings
         gmap?.uiSettings?.apply {
@@ -111,15 +120,22 @@ class SettingFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setMarker(pos: LatLng) {
-        val marker = MarkerOptions()
-        marker.title(getString(R.string.title_master_location))
-            .snippet("${pos.latitude}, ${pos.longitude}")
-            .position(pos)
-            .draggable(true)
+        if (marker == null) {
+            val markerOptions = MarkerOptions()
+            markerOptions.title(getString(R.string.title_master_location))
+                .snippet("${pos.latitude}, ${pos.longitude}")
+                .position(pos)
+                .draggable(true)
+            marker = gmap?.addMarker(markerOptions)
+        } else {
+            marker?.position = pos
+            marker?.snippet = "${pos.latitude}, ${pos.longitude}"
+        }
 
-        // Clear marker first to prevent duplicate markers
-        gmap?.clear()
-        gmap?.addMarker(marker)
+        // Auto-zoom to the marker location
+        gmap?.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(pos, 15f)
+        )
     }
 
     private fun onMasterLocationUpdated(error: String?) {

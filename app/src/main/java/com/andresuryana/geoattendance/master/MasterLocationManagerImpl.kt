@@ -10,14 +10,20 @@ class MasterLocationManagerImpl(context: Context) : MasterLocationManager {
 
     override fun setMasterLocation(latitude: Double, longitude: Double) {
         prefs.edit()
-            .putLong(KEY_LATITUDE, latitude.toLong())
-            .putLong(KEY_LONGITUDE, longitude.toLong())
+            .putString(KEY_LATITUDE, latitude.toString())
+            .putString(KEY_LONGITUDE, longitude.toString())
             .apply()
     }
 
-    override fun getLatitude(): Double = prefs.getLong(KEY_LATITUDE, DEFAULT_LATITUDE.toLong()).toDouble()
+    override fun getLatitude(): Double {
+        val latitudeStr = prefs.getString(KEY_LATITUDE, DEFAULT_LATITUDE.toString())
+        return latitudeStr?.toDoubleOrNull() ?: DEFAULT_LATITUDE
+    }
 
-    override fun getLongitude(): Double = prefs.getLong(KEY_LONGITUDE, DEFAULT_LONGITUDE.toLong()).toDouble()
+    override fun getLongitude(): Double {
+        val longitudeStr = prefs.getString(KEY_LONGITUDE, DEFAULT_LONGITUDE.toString())
+        return longitudeStr?.toDoubleOrNull() ?: DEFAULT_LONGITUDE
+    }
 
     companion object {
         private const val PREFS_NAME = "master_location_prefs"

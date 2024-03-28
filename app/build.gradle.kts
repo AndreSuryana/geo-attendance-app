@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
     alias(libs.plugins.daggerHilt)
+    alias(libs.plugins.gmsMaps)
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -70,8 +72,24 @@ dependencies {
     // Navigation Component
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Geo Location
+    implementation(libs.gms.maps)
 }
 
 kapt {
     correctErrorTypes = true
+}
+
+secrets {
+    // Define secrets file
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values
+    defaultPropertiesFileName = "local.default.properties"
+
+    // Configure which keys should be ignored by the plugin by providing regular expressions.
+    // "sdk.dir" is ignored by default.
+    ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
 }

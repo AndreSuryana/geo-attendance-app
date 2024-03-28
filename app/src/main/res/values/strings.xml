@@ -7,16 +7,27 @@
     <string name="title_setting">Setting</string>
     <string name="title_checked_in">Checked In</string>
     <string name="title_checked_out">Checked Out</string>
+    <string name="title_warning">Warning!</string>
 
     <!-- Onboarding -->
     <string name="title_first_time_setup">First Time Setup</string>
     <string name="subtitle_first_time_setup">Please provide your name to continue using the Geo Attendance app.</string>
 
+    <!-- Home -->
+    <string name="text_style_date">📅 %s</string>
+    <string name="text_style_time">🕓 %s</string>
+
+    <!-- Dialog -->
+    <string name="dialog_confirm_update_master_location">Are you sure to update master location?</string>
+
     <!-- Button -->
     <string name="btn_submit">Submit</string>
+    <string name="btn_positive">Yes</string>
+    <string name="btn_negative">No</string>
 
-    <!-- Hint -->
+    <!-- Hint/Label -->
     <string name="hint_username">Username</string>
+    <string name="label_master_location">Select Master Location</string>
 
     <!-- Placeholder -->
     <string name="placeholder_date">Mon - 25 Mar 2024</string>
@@ -24,4 +35,5 @@
     <string name="placeholder_distance">10 m</string>
     <string name="desc_empty_history">Empty History Icon</string>
     <string name="placeholder_empty_history">There\'s no attendance history yet!</string>
+    <string name="title_master_location">Master Location</string>
 </resources>

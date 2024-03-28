@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.andresuryana.geoattendance.data.repository.AttendanceRepository
 import com.andresuryana.geoattendance.data.repository.AttendanceRepositoryImpl
 import com.andresuryana.geoattendance.data.source.local.database.AttendanceDatabase
+import com.andresuryana.geoattendance.master.MasterLocationManager
+import com.andresuryana.geoattendance.master.MasterLocationManagerImpl
 import com.andresuryana.geoattendance.session.SessionManager
 import com.andresuryana.geoattendance.session.SessionManagerImpl
 import dagger.Module
@@ -33,4 +35,9 @@ object AttendanceModule {
     @Singleton
     fun provideAttendanceRepository(local: AttendanceDatabase): AttendanceRepository =
         AttendanceRepositoryImpl(local)
+
+    @Provides
+    @Singleton
+    fun provideMasterLocationManager(@ApplicationContext context: Context): MasterLocationManager =
+        MasterLocationManagerImpl(context)
 }

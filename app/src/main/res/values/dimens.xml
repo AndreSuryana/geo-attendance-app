@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_extra_small">8dp</dimen>
+    <dimen name="padding_small">16dp</dimen>
+    <dimen name="padding_normal">24dp</dimen>
+    <dimen name="padding_big">32dp</dimen>
+
+    <dimen name="margin_extra_small">8dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_big">24dp</dimen>
+
+    <dimen name="radius_corner_default">12dp</dimen>
+    <dimen name="radius_corner_small">8dp</dimen>
+
+    <dimen name="elevation_top_app_bar">8dp</dimen>
+    <dimen name="elevation_card_item_default">4dp</dimen>
+</resources>

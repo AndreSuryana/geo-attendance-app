@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_big"
+    android:layout_marginVertical="@dimen/margin_extra_small"
+    android:background="@color/white"
+    app:cardCornerRadius="@dimen/radius_corner_small"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/elevation_card_item_default"
+        android:padding="@dimen/padding_extra_small">
+
+        <!-- Icon -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="6dp"
+            app:contentPadding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_enter_exit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/green" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Title -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_extra_small"
+            android:text="@string/title_checked_in"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            app:layout_constraintEnd_toStartOf="@+id/tv_time"
+            app:layout_constraintStart_toEndOf="@id/cv_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Day & Date -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_date"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <!-- Time -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_time"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+        <!-- Distance -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_distance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_distance"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

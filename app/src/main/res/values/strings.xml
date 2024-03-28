@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Geo Attendance</string>
+
+    <!-- General Title -->
+    <string name="title_home">Home</string>
+    <string name="title_history">History</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_checked_in">Checked In</string>
+    <string name="title_checked_out">Checked Out</string>
+
+    <!-- Onboarding -->
+    <string name="title_first_time_setup">First Time Setup</string>
+    <string name="subtitle_first_time_setup">Please provide your name to continue using the Geo Attendance app.</string>
+
+    <!-- Button -->
+    <string name="btn_submit">Submit</string>
+
+    <!-- Hint -->
+    <string name="hint_username">Username</string>
+
+    <!-- Placeholder -->
+    <string name="placeholder_date">Mon - 25 Mar 2024</string>
+    <string name="placeholder_time">9:00 AM</string>
+    <string name="placeholder_distance">10 m</string>
+    <string name="desc_empty_history">Empty History Icon</string>
+    <string name="placeholder_empty_history">There\'s no attendance history yet!</string>
+</resources>

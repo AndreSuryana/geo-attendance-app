@@ -10,6 +10,28 @@
         android:id="@+id/top_bar"
         layout="@layout/top_app_bar" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extra_big"
+        android:paddingHorizontal="@dimen/padding_normal"
+        android:text="@string/title_greeting"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_desc_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:paddingHorizontal="@dimen/padding_normal"
+        android:text="@string/subtitle_greeting"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constraintTop_toBottomOf="@id/tv_greeting" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_date_time"
         android:layout_width="match_parent"
@@ -19,7 +41,7 @@
         app:cardCornerRadius="@dimen/radius_corner_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar">
+        app:layout_constraintTop_toBottomOf="@+id/tv_desc_greeting">
 
         <LinearLayout
             android:layout_width="match_parent"

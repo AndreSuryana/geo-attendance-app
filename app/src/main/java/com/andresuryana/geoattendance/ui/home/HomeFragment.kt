@@ -68,6 +68,7 @@ class HomeFragment : Fragment() {
         viewModel.currentDate.observe(viewLifecycleOwner, this::setCurrentDate)
         viewModel.currentTime.observe(viewLifecycleOwner, this::setCurrentTime)
         viewModel.actionType.observe(viewLifecycleOwner, this::observeActionType)
+        viewModel.getUsername().observe(viewLifecycleOwner, this::setGreeting)
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -161,5 +162,9 @@ class HomeFragment : Fragment() {
 
     private fun observeError(messageRes: Int) {
         Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setGreeting(username: String) {
+        binding.tvGreeting.text = getString(R.string.title_greeting, username)
     }
 }

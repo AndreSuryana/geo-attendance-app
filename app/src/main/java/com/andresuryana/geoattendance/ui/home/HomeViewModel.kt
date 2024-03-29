@@ -173,6 +173,8 @@ class HomeViewModel @Inject constructor(
         this.currentLocation = location
     }
 
+    fun getUsername(): LiveData<String> = MutableLiveData(session.getUsername())
+
     override fun onCleared() {
         super.onCleared()
         timer.cancel()

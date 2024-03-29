@@ -8,6 +8,9 @@
     <string name="title_checked_in">Checked In</string>
     <string name="title_checked_out">Checked Out</string>
     <string name="title_warning">Warning!</string>
+    <string name="title_master_location">Master Location</string>
+    <string name="title_greeting">Hai, %s</string>
+    <string name="subtitle_greeting">Welcome to the Geo Attendance application! Let\'s track your presence and make every moment count.</string>
 
     <!-- Onboarding -->
     <string name="title_first_time_setup">First Time Setup</string>
@@ -44,5 +47,4 @@
     <string name="placeholder_distance">10 m</string>
     <string name="desc_empty_history">Empty History Icon</string>
     <string name="placeholder_empty_history">There\'s no attendance history yet!</string>
-    <string name="title_master_location">Master Location</string>
 </resources>

@@ -2,9 +2,7 @@ package com.andresuryana.geoattendance.session
 
 import android.content.Context
 import android.content.SharedPreferences
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Date
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton

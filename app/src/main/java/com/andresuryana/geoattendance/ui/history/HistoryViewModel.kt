@@ -23,7 +23,7 @@ class HistoryViewModel @Inject constructor(
         getHistories()
     }
 
-    private fun getHistories() {
+    fun getHistories() {
         viewModelScope.launch(Dispatchers.IO) {
             _histories.postValue(repository.getAttendanceList())
         }

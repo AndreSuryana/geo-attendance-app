@@ -38,6 +38,7 @@ class HistoryFragment : Fragment() {
 
         setupTopBar()
         setupRecyclerView()
+        setupRefreshLayout()
 
         viewModel.histories.observe(viewLifecycleOwner, this::setAttendanceHistories)
     }
@@ -55,7 +56,17 @@ class HistoryFragment : Fragment() {
         binding.rvHistory.adapter = adapter
     }
 
+    private fun setupRefreshLayout() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.getHistories()
+        }
+    }
+
     private fun setAttendanceHistories(attendances: List<Attendance>) {
+        // Stop refresh layout
+        binding.swipeRefresh.isRefreshing = false
+
+        // Show result
         if (attendances.isEmpty()) {
             binding.rvHistory.visibility = View.GONE
             binding.emptyLayout.visibility = View.VISIBLE

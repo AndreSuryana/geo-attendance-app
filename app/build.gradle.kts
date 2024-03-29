@@ -75,6 +75,9 @@ dependencies {
 
     // Geo Location
     implementation(libs.gms.maps)
+
+    // Swipe Refresh Layout
+    implementation(libs.swiperefresh)
 }
 
 kapt {

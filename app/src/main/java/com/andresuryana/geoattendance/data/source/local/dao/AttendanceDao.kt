@@ -8,8 +8,11 @@ import com.andresuryana.geoattendance.data.source.local.entity.AttendanceEntity
 @Dao
 interface AttendanceDao {
 
-    @Query("SELECT * FROM attendances")
+    @Query("SELECT * FROM attendances ORDER BY timestamp DESC")
     fun getAttendanceList(): List<AttendanceEntity>
+
+    @Query("SELECT * FROM attendances ORDER BY timestamp DESC")
+    fun getLastAttendance(): AttendanceEntity?
 
     @Insert
     fun insertAttendance(attendance: AttendanceEntity)

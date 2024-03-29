@@ -14,6 +14,8 @@ class SessionManagerImpl(context: Context) : SessionManager {
 
     override fun isLoggedOn(): Boolean = prefs.getString(KEY_USERNAME, null) != null
 
+    override fun getUsername(): String? = prefs.getString(KEY_USERNAME, null)
+
     override fun insertSession(username: String, timestamp: Date) {
         prefs.edit()
             .putString(KEY_USERNAME, username)

@@ -6,6 +6,8 @@ interface SessionManager {
 
     fun isLoggedOn(): Boolean
 
+    fun getUsername(): String?
+
     fun insertSession(username: String, timestamp: Date)
 
     fun clearSession()

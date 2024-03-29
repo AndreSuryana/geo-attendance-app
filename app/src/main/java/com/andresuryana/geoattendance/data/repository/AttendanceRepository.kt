@@ -6,6 +6,8 @@ interface AttendanceRepository {
 
     fun getAttendanceList(): List<Attendance>
 
+    fun getLastAttendance(): Attendance?
+
     fun insertAttendance(attendance: Attendance)
 
     fun deleteAllAttendance()

@@ -13,6 +13,9 @@ class AttendanceRepositoryImpl @Inject constructor(
     override fun getAttendanceList(): List<Attendance> =
         local.attendanceDao().getAttendanceList().map { it.toAttendance() }
 
+    override fun getLastAttendance(): Attendance? =
+        local.attendanceDao().getLastAttendance()?.toAttendance()
+
     override fun insertAttendance(attendance: Attendance) {
         local.attendanceDao().insertAttendance(attendance.toEntity())
     }

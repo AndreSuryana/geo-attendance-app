@@ -8,6 +8,7 @@
     <dimen name="margin_extra_small">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_big">24dp</dimen>
+    <dimen name="margin_circle_button">56dp</dimen>
 
     <dimen name="radius_corner_default">12dp</dimen>
     <dimen name="radius_corner_small">8dp</dimen>

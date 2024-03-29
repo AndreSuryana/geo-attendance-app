@@ -24,10 +24,16 @@
     <string name="btn_submit">Submit</string>
     <string name="btn_positive">Yes</string>
     <string name="btn_negative">No</string>
+    <string name="btn_check_in">Check In</string>
+    <string name="btn_check_out">Check Out</string>
 
     <!-- Hint/Label -->
     <string name="hint_username">Username</string>
     <string name="label_master_location">Select Master Location</string>
+
+    <!-- Error -->
+    <string name="error_check_in">Check in error!</string>
+    <string name="error_check_out">Check out error!</string>
 
     <!-- Placeholder -->
     <string name="placeholder_date">Mon - 25 Mar 2024</string>

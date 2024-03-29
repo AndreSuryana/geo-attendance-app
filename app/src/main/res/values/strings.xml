@@ -30,6 +30,9 @@
     <!-- Hint/Label -->
     <string name="hint_username">Username</string>
     <string name="label_master_location">Select Master Location</string>
+    <string name="label_move_closer_1">You\'re almost there! Just a little closer</string>
+    <string name="label_move_closer_2">Try to move closer to the master location!</string>
+    <string name="label_move_closer_3">To far from the master location!</string>
 
     <!-- Error -->
     <string name="error_check_in">Check in error!</string>

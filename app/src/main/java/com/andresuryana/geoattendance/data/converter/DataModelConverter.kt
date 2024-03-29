@@ -12,6 +12,7 @@ object DataModelConverter {
             id = id,
             type = AttendanceType.valueOf(type),
             username = username,
+            distance = distance.toFloat(),
             timestamp = Date(timestamp)
         )
     }
@@ -21,6 +22,7 @@ object DataModelConverter {
             id = id,
             type = type.name,
             username = username,
+            distance = distance.toString(),
             timestamp = timestamp.time
         )
     }

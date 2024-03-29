@@ -29,6 +29,6 @@ class HistoryViewHolder(private val binding: ItemHistoryBinding) :
         }
         binding.tvDate.text = item.timestamp.formatDate(FORMAT_DATE_WITH_DAY)
         binding.tvTime.text = item.timestamp.formatToTime12Hour()
-
+        binding.tvDistance.text = String.format("%.2f m", item.distance)
     }
 }

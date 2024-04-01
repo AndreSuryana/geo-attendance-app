@@ -75,6 +75,7 @@ dependencies {
 
     // Geo Location
     implementation(libs.gms.maps)
+    implementation(libs.gms.location)
 
     // Swipe Refresh Layout
     implementation(libs.swiperefresh)

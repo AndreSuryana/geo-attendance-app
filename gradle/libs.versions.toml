@@ -16,6 +16,7 @@ hilt = "2.50"
 room = "2.6.1"
 navigation = "2.7.7"
 gmsMaps = "18.2.0"
+gmsLocation = "21.2.0"
 mapsPlugin = "2.0.1"
 swiperefresh = "1.2.0-alpha01"
 
@@ -37,6 +38,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 gms-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "gmsMaps" }
+gms-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "gmsLocation" }
 swiperefresh = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefresh"}
 
 [plugins]

@@ -1,7 +1,6 @@
 package com.andresuryana.geoattendance.ui.home
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,9 +23,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.andresuryana.geoattendance.R
 import com.andresuryana.geoattendance.data.model.AttendanceType
 import com.andresuryana.geoattendance.databinding.FragmentHomeBinding
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -40,21 +39,33 @@ class HomeFragment : Fragment() {
     private lateinit var locationManager: LocationManager
 
     private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) {
-                getCurrentLocation()
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.forEach { (permission, isGranted) ->
+                if (!isGranted) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Permission $permission is denied!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@registerForActivityResult
+                }
             }
+
+            // Continue get location
+            getCurrentLocation()
         }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        locationManager =
+            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        locationManager =
-            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
         return binding.root
     }
 
@@ -89,28 +100,69 @@ class HomeFragment : Fragment() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             // Permission already granted, proceed to get the location
             getCurrentLocation()
         } else {
             // Request location permission
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
         }
     }
 
-    @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request location permission
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+            return
+        }
+
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             // GPS is enabled, proceed to get location
-            val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            location?.let {
-                val latitude = it.latitude
-                val longitude = it.longitude
-                // Use latitude and longitude as needed
-                Log.d("HomeFragment", "getCurrentLocation: lat=$latitude, lng=$longitude")
+            val gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            if (gpsLocation != null) {
+                val latitude = gpsLocation.latitude
+                val longitude = gpsLocation.longitude
+                Log.d(
+                    "HomeFragment",
+                    "getCurrentLocation: Using GPS! lat=$latitude, lng=$longitude"
+                )
                 viewModel.setLocation(LatLng(latitude, longitude))
-
+            } else {
+                LocationServices.getFusedLocationProviderClient(requireContext())
+                    .lastLocation.addOnSuccessListener { gmsLocation ->
+                        gmsLocation?.let {
+                            val latitude = gmsLocation.latitude
+                            val longitude = gmsLocation.longitude
+                            Log.d(
+                                "HomeFragment",
+                                "getCurrentLocation: Using GMS Location! lat=$latitude, lng=$longitude"
+                            )
+                            viewModel.setLocation(LatLng(latitude, longitude))
+                        }
+                    }
             }
         } else {
             // Request to enable GPS

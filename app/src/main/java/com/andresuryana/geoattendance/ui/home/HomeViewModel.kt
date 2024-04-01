@@ -121,6 +121,7 @@ class HomeViewModel @Inject constructor(
             return false
         } else {
             Log.d("HomeViewModel", "validateDistance: No GPS location!")
+            _error.emit(R.string.error_failed_get_location)
             return false
         }
     }

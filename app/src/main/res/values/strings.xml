@@ -40,6 +40,7 @@
     <!-- Error -->
     <string name="error_check_in">Check in error!</string>
     <string name="error_check_out">Check out error!</string>
+    <string name="error_failed_get_location">Failed to get location</string>
 
     <!-- Placeholder -->
     <string name="placeholder_date">Mon - 25 Mar 2024</string>

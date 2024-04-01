@@ -164,7 +164,7 @@ class HomeFragment : Fragment() {
         Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
     }
 
-    private fun setGreeting(username: String) {
-        binding.tvGreeting.text = getString(R.string.title_greeting, username)
+    private fun setGreeting(username: String?) {
+        binding.tvGreeting.text = getString(R.string.title_greeting, username ?: "User")
     }
 }

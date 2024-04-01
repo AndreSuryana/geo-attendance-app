@@ -19,8 +19,8 @@ import com.andresuryana.geoattendance.util.StringUtils.formatToTime12Hour
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
@@ -46,8 +46,8 @@ class HomeViewModel @Inject constructor(
     private val _actionType = MutableLiveData<AttendanceType>()
     val actionType: LiveData<AttendanceType> = _actionType
 
-    private val _error = MutableSharedFlow<Int>()
-    val error = _error.asSharedFlow()
+    private val _error = MutableStateFlow<Int?>(null)
+    val error = _error.asStateFlow()
 
     private var currentLocation: LatLng? = null
     private var currentDistance: Float = -1f
@@ -174,6 +174,12 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getUsername(): LiveData<String?> = MutableLiveData(session.getUsername())
+
+    fun clearError() {
+        viewModelScope.launch {
+            _error.emit(null)
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()

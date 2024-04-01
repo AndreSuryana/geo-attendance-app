@@ -72,7 +72,10 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.error.collectLatest { observeError(it) }
+                viewModel.error.collect { messageRes ->
+                    messageRes?.let { observeError(it) }
+                    viewModel.clearError()
+                }
             }
         }
     }
@@ -160,8 +163,10 @@ class HomeFragment : Fragment() {
         else setCheckInButton()
     }
 
-    private fun observeError(messageRes: Int) {
-        Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
+    private fun observeError(messageRes: Int?) {
+        messageRes?.let {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setGreeting(username: String?) {
